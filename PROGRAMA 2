@@ -1,0 +1,234 @@
+#include <iostream>
+
+using namespace std;
+
+
+class Materia
+{
+    private:
+        int Clave;
+        string Nombre;
+        string ProfesorTit;
+        string LibroTexto;
+
+    protected:
+
+    public:
+        Materia ()
+        {
+            Clave = 0;
+            Nombre = "";
+            ProfesorTit = "";
+            LibroTexto = "";
+        }
+
+        Materia(int CLAVE, string NOMBRE, string PROFESORTIT, string LIBROTEXTO)
+        {
+            Clave = CLAVE;
+            Nombre = NOMBRE;
+            ProfesorTit = PROFESORTIT;
+            LibroTexto = LIBROTEXTO;
+        }
+
+         //===============SOBRE CARGA
+            friend ostream& operator <<(ostream &o, Materia &m)
+            {
+                o<<"\nCLAVE: "<< m.Clave;//privado
+                o<<"\nNOMBRE: "<< m.Nombre;//privado
+                o<<"\nPROFESOR: "<< m.ProfesorTit;//privado
+                o<<"\nLIBRO: "<< m.LibroTexto;//privado
+            }
+            friend istream& operator >>(istream &i, Materia &m)
+            {
+                cout<<"\nCLAVE: ";
+                i>>m.Clave;//privado
+                cout<<"\nNOMBRE: ";
+                i>>m.Nombre;//privado
+                cout<<"\nPROFESOR: ";
+                i>>m.ProfesorTit;//privado
+                cout<<"\nLIBRO: ";
+                i>>m.LibroTexto;//privado
+            }
+            bool operator ==(Materia &m)
+            {
+                return (ProfesorTit==m.ProfesorTit);
+            }
+
+        //===========FIN DE SOBRECARGA
+
+
+        //=================FUNCIONES
+
+        void Imprime()
+        {
+            cout<<"\n----------DATOS----------\n"
+                <<"\nCLAVE: "<<Clave
+                <<"\nNOMBRE: "<<Nombre
+                <<"\nNOMBRE DEL MAESTRO: "<<ProfesorTit
+                <<"\nLIBRO DE TEXTO: "<<LibroTexto<<endl;
+                cout<<"\nPRESIONE CUALQUIER TECLA PARA CONTINUAR"<<endl;
+                system ("pause");
+        }
+
+        void CambiaClave(int x)
+        {
+            Clave = x;
+            cout<<"\n\n\nLA CLAVE SE HA ACTUALIZADO CON EXITO!!!";
+            cout<<"\nPRESIONE CUALQUIER TECLA PARA CONTINUAR"<<endl;
+                system ("pause");
+        }
+        void CambiaProfe(string y)
+        {
+            ProfesorTit = y;
+            cout<<"\n\n\nEL NOMBRE DEL MAESTRO SE HA ACTUALIZADO CON EXITO!!!";
+            cout<<"\nPRESIONE CUALQUIER TECLA PARA CONTINUAR"<<endl;
+                system ("pause");
+        }
+};
+
+
+
+int main()
+{
+    int opc, _clave, aux;
+    string _ProfesorTit;
+    Materia Programacion (1234, "PROGRAMACION", "JULIO PEREZ", "ESTRUCTURAS DE DATOS C++");
+    Materia BasesDatos (5678, "BASES DE DATOS", "ANA DELGADO", "DESARROLLO DE BASES DE DATOS");
+
+   do
+   {
+       system ("cls");
+       if (Programacion == BasesDatos)
+                        {
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS ES EL MISMO\n";
+                        }
+                    else
+                        {
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
+                        }
+       cout<<"----------BIENVENID@----------"
+        <<"\n\n----------MENU----------"
+        <<"\n1) IMPRIMIR DATOS"
+        <<"\n2) MODIFICAR CLAVE"
+        <<"\n3) MODIFICAR PROFESOR"
+        <<"\n4) SALIR"
+        <<"\n-DIGITE UNA OPCION: ";
+        cin >>opc;
+
+        switch(opc)
+        {
+
+            case 1:
+                    do
+                    {
+                    system ("cls");
+                    cout<<"\n\n----------VISUALIZACION DE MATERIAS----------"
+                        <<"\n1) PROGRAMACION"
+                        <<"\n2) BASE DE DATOS"
+                        <<"\n-DIGITE UNA OPCION: ";
+                    cin>>aux;
+                    switch(aux)
+                    {
+                    case 1:
+                            Programacion.Imprime();
+                            break;
+                    case 2:
+                            BasesDatos.Imprime();
+                            break;
+                    default:
+                            cout <<"\nOPCION NO VALIDA\nFAVOR DE VERIFICAR\nPRESIONE CUALQUIER TECLA PARA CONTINUAR...\n"<<endl;
+                            system ("pause");
+                    }
+
+
+                    }while(aux != 1 && aux != 2);
+                    break;
+
+            case 2:
+                    do
+                    {
+                    system ("cls");
+                    cout<<"\n\n----------MATERIAS PARA MODIFICACION DE CLAVE----------"
+                        <<"\n1) PROGRAMACION"
+                        <<"\n2) BASE DE DATOS"
+                        <<"\n-DIGITE UNA OPCION: ";
+                    cin>>aux;
+                    switch(aux)
+                    {
+                    case 1:
+                            cout <<"MODIFICACION DE LA SIGUIENTE CLAVE DE MATERIA:"<<endl;
+                            Programacion.Imprime();
+                            cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
+                            cin>>_clave;
+                            Programacion.CambiaClave(_clave);
+                            break;
+                    case 2:
+                            cout <<"MODIFICACION DE LA SIGUIENTE CLAVE DE MATERIA:"<<endl;
+                            BasesDatos.Imprime();
+                            cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
+                            cin>>_clave;
+                            BasesDatos.CambiaClave(_clave);
+                            break;
+                    default:
+                            cout <<"\nOPCION NO VALIDA\nFAVOR DE VERIFICAR\nPRESIONE CUALQUIER TECLA PARA CONTINUAR...\n"<<endl;
+                            system ("pause");
+                    }
+
+
+                    }while(aux != 1 && aux != 2);
+                    break;
+
+            case 3:
+                    do
+                    {
+                    system ("cls");
+                    cout<<"\n\n----------MATERIAS PARA MODIFICACION DE PROFESOR----------"
+                        <<"\n1) PROGRAMACION"
+                        <<"\n2) BASE DE DATOS"
+                        <<"\n-DIGITE UNA OPCION: ";
+                    cin>>aux;
+                    switch(aux)
+                    {
+                    case 1:
+                            cout <<"MODIFICACION DEL MAESTRO DE LA SIGUIENTE MATERIA:"<<endl;
+                            Programacion.Imprime();
+                            cout <<"INGRESE EL NOMBRE NUEVO: "<<endl;
+                            cin.ignore();getline(cin, _ProfesorTit);
+                            Programacion.CambiaProfe(_ProfesorTit);
+                            break;
+                    case 2:
+                            cout <<"MODIFICACION DEL MAESTRO DE LA SIGUIENTE MATERIA:"<<endl;
+                            BasesDatos.Imprime();
+                            cout <<"INGRESE EL NOMBRE NUEVO: "<<endl;
+                            cin.ignore();getline(cin, _ProfesorTit);
+                            BasesDatos.CambiaProfe(_ProfesorTit);
+                            break;
+                    default:
+                            cout <<"\nOPCION NO VALIDA\nFAVOR DE VERIFICAR\nPRESIONE CUALQUIER TECLA PARA CONTINUAR...\n"<<endl;
+                            system ("pause");
+                    }
+                    }while(aux != 1 && aux != 2);
+                    if (Programacion == BasesDatos)
+                        {
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS ES EL MISMO\n";
+                        }
+                    else
+                        {
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
+                        }
+                    system ("pause");
+                    break;
+
+            case 4:
+                    system ("cls");
+                    cout<<"SALIENDO DEL PROGRAMA... PRESIONE CUALQUIER TECLA PARA SALIR"<<endl;
+                    break;
+
+            default: cout<<"OPCION INVALIDA, ESCOJA UNA OPCION DEL MENU"<< endl;
+                        system ("pause");
+
+        }
+
+   }while(opc != 4);
+    return 0;
+}
