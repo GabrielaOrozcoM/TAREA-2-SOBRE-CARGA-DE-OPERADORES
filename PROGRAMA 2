@@ -49,10 +49,24 @@ class Materia
                 cout<<"\nLIBRO: ";
                 i>>m.LibroTexto;//privado
             }
+            bool operator !=(Materia &m)
+            {
+                return (ProfesorTit!=m.ProfesorTit);
+            }
+
             bool operator ==(Materia &m)
             {
-                return (ProfesorTit==m.ProfesorTit);
+                return (Clave==m.Clave);
             }
+            bool operator >(Materia &m)
+            {
+                return (Clave>m.Clave);
+            }
+            bool operator <(Materia &m)
+            {
+                return (Clave<m.Clave);
+            }
+
 
         //===========FIN DE SOBRECARGA
 
@@ -73,9 +87,7 @@ class Materia
         void CambiaClave(int x)
         {
             Clave = x;
-            cout<<"\n\n\nLA CLAVE SE HA ACTUALIZADO CON EXITO!!!";
-            cout<<"\nPRESIONE CUALQUIER TECLA PARA CONTINUAR"<<endl;
-                system ("pause");
+
         }
         void CambiaProfe(string y)
         {
@@ -98,13 +110,21 @@ int main()
    do
    {
        system ("cls");
-       if (Programacion == BasesDatos)
+       if (Programacion != BasesDatos)
+                        {
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
+                        }
+        else
                         {
                             cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS ES EL MISMO\n";
                         }
-                    else
+        if (Programacion > BasesDatos)
                         {
-                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
+                            cout<<"LA CLAVE DE PROGRAMACION ES MAYOR A LA DE BASE DE DATOS\n";
+                        }
+        if (Programacion < BasesDatos)
+                        {
+                            cout<<"LA CLAVE DE PROGRAMACION ES MENOR A LA DE BASE DE DATOS\n";
                         }
        cout<<"----------BIENVENID@----------"
         <<"\n\n----------MENU----------"
@@ -158,16 +178,32 @@ int main()
                     case 1:
                             cout <<"MODIFICACION DE LA SIGUIENTE CLAVE DE MATERIA:"<<endl;
                             Programacion.Imprime();
-                            cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
-                            cin>>_clave;
-                            Programacion.CambiaClave(_clave);
+                            do
+                            {
+                                cout <<"NOTA: NO SE PUEDE USAR UNA MISMA CLAVE PARA AMBAS MATERIAS\n"<<endl;
+                                cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
+                                cin>>_clave;
+                                Programacion.CambiaClave(_clave);
+
+                            }while (Programacion == BasesDatos);
+
+                            cout<<"\n\n\nLA CLAVE SE HA ACTUALIZADO CON EXITO!!!";
+                            system ("pause");
                             break;
                     case 2:
                             cout <<"MODIFICACION DE LA SIGUIENTE CLAVE DE MATERIA:"<<endl;
                             BasesDatos.Imprime();
-                            cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
-                            cin>>_clave;
-                            BasesDatos.CambiaClave(_clave);
+                            do
+                            {
+                                cout <<"NOTA: NO SE PUEDE USAR UNA MISMA CLAVE PARA AMBAS MATERIAS\n"<<endl;
+                                cout <<"INGRESE LA NUEVA CLAVE: "<<endl;
+                                cin>>_clave;
+                                BasesDatos.CambiaClave(_clave);
+
+                            }while (BasesDatos == Programacion);
+
+                            cout<<"\n\n\nLA CLAVE SE HA ACTUALIZADO CON EXITO!!!";
+                            system ("pause");
                             break;
                     default:
                             cout <<"\nOPCION NO VALIDA\nFAVOR DE VERIFICAR\nPRESIONE CUALQUIER TECLA PARA CONTINUAR...\n"<<endl;
@@ -208,13 +244,13 @@ int main()
                             system ("pause");
                     }
                     }while(aux != 1 && aux != 2);
-                    if (Programacion == BasesDatos)
+                    if (Programacion != BasesDatos)
                         {
-                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS ES EL MISMO\n";
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
                         }
                     else
                         {
-                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS NO SON EL MISMO\n";
+                            cout<<"EL PROFESOR QUE IMPARTE LAS MATERIAS DE PROGRAMACION Y BASES DE DATOS ES EL MISMO\n";
                         }
                     system ("pause");
                     break;
