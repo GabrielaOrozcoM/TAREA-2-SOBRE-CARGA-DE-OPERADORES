@@ -59,21 +59,22 @@ class empleado
             }
             bool operator ==(empleado & e)
             {
-                return (ClaveEmpleado==e.ClaveEmpleado && Nombre==e.Nombre && Domicilio==e.Domicilio && Sueldo==e.Sueldo && ReportaA==e.ReportaA);
+                return Sueldo == e.Sueldo;
             }
 
             bool operator !=(empleado & e)
             {
                 return (ClaveEmpleado!=e.ClaveEmpleado && Nombre!=e.Nombre && Domicilio!=e.Domicilio && Sueldo!=e.Sueldo && ReportaA!=e.ReportaA);
             }
-            bool operator <(empleado & e)
+            bool operator <(empleado &e) const
             {
-                return (ClaveEmpleado<e.ClaveEmpleado && Nombre<e.Nombre && Domicilio<e.Domicilio && Sueldo<e.Sueldo && ReportaA<e.ReportaA);
+                return Sueldo < e.Sueldo;
             }
-            bool operator >(empleado & e)
+            bool operator >(empleado &e) const
             {
-                return (ClaveEmpleado>e.ClaveEmpleado && Nombre>e.Nombre && Domicilio>e.Domicilio && Sueldo>e.Sueldo && ReportaA>e.ReportaA);
+                return Sueldo > e.Sueldo;
             }
+
 
         //===========FIN DE SOBRECARGA
 
@@ -126,19 +127,32 @@ int main()
    int opc, _clave;
     string _domicilio, _ReportaA;
     float _sueldo;
-    empleado JefePlanta (1234, "GABRIELA SARAHI OROZCO MADRIGAL", "ISLANDIA #625", 15000.00, "FULANO DE TAL");
-    empleado JefePiso (5678, "BRAYAN MELENDEZ", "CALLE #2", 8000.50, "PERENGANO DE TAL");
-    if(JefePlanta==JefePiso)
-        {
-       cout<<"JefePlanta es igual a JefePiso\n";
+    empleado JefePlanta (1234, "GABRIELA SARAHI OROZCO MADRIGAL", "ISLANDIA #625", 80000.00, "FULANO DE TAL");
+    empleado JefePiso (5678, "BRAYAN MELENDEZ", "CALLE #2", 80000.00, "PERENGANO DE TAL");
+    if(JefePlanta > JefePiso)
+    {
+       cout<<"el SUELDO de JefePlanta es MAYOR a JefePiso\n";
+    }
+    else if (JefePlanta == JefePiso)
+    {
+        cout<<"el SUELDO de JefePlanta es IGUAL a JefePiso\n";
     }
     else
     {
-        cout<<"JefePlanta NO es igual a JefePiso\n";
+        cout<<"el SUELDO de JefePlanta es MENOR a JefePiso\n";
     }
 
    do
    {
+
+       if (JefePiso != JefePlanta)
+       {
+           cout<<"\nJefe Piso NO ES IGUAL a Jefe Planta\n";
+       }
+       else
+       {
+           cout<<"\nJefe Piso ES IGUAL a Jefe Planta\n";
+       }
        cout<<"----------BIENVENID@----------"
         <<"\n\n----------MENU----------"
         <<"\n1) IMPRIMIR DATOS"
@@ -168,13 +182,12 @@ int main()
                     }
                     else
                     {
-                         cout<<"CLAVE INCORRECTA, PRESEIONE CUALQUIER TECLA PARA SER REDIRIGIDO AL MENU PRINCIPAL"<<endl;
+                         cout<<"CLAVE INCORRECTA, PRESIONE CUALQUIER TECLA PARA SER REDIRIGIDO AL MENU PRINCIPAL"<<endl;
                          system ("pause");
                     }
                     break;
 
             case 2:
-                    system ("cls");
                     cout<<"INGRESE CLAVE DEL EMPLEADO PARA LA MODIFICACION DE DOMICILIO: "<<endl;
                     cin>>_clave;
                     if (_clave == 1234 || _clave == 5678)
@@ -204,7 +217,6 @@ int main()
                     break;
 
             case 3:
-                    system ("cls");
                     cout<<"INGRESE CLAVE DEL EMPLEADO PARA EL INCREMENTO DE SUELDO: "<<endl;
                     cin>>_clave;
                     if (_clave == 1234 || _clave == 5678)
@@ -216,6 +228,7 @@ int main()
                             cout <<"USANDO DECIMALES INGRESE EL PORCENTAJE DE INCREMENTO A APLICAR AL SUELDO : "<<endl;
                             cin >> _sueldo;
                             JefePlanta.actualizaciondesueldito(_sueldo);
+
                         }
                         if (_clave == 5678)
                         {
@@ -224,7 +237,24 @@ int main()
                             cout <<"USANDO DECIMALES INGRESE EL PORCENTAJE DE INCREMENTO A APLICAR AL SUELDO : "<<endl;
                             cin >> _sueldo;
                             JefePiso.actualizaciondesueldito(_sueldo);
+
                         }
+
+                    //================ COMPARACION DE SUELDO ======================
+                            if(JefePlanta > JefePiso)
+                            {
+                               cout<<"JefePlanta es gana MAS que el JefePiso\n";
+                            }
+                            else if (JefePlanta == JefePiso)
+                            {
+                                cout<<"JefePlanta gana IGUAL al JefePiso\n";
+                            }
+                            else
+                            {
+                                cout<<"JefePlanta es MENOR a JefePiso\n";
+                            }
+                    //================ COMPARACION DE SUELDO ======================
+
                     }
                     else
                     {
@@ -278,14 +308,3 @@ int main()
 
     return 0;
 }
-    /*cout<<"=============INGRESE LOS DATOS DE UN NUEVO EMPLEADO\n";
-    cin>>extra;
-    extra.imprimir();
-
-    if(JefePlanta<JefePiso){
-       cout<<"JefePlanta es igual a JefePiso\n";
-    }
-    else{
-        cout<<"JefePlanta NO es igual a JefePiso\n";
-    }*/
-
